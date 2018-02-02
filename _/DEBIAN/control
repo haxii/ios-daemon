@@ -1,0 +1,11 @@
+Package: com.haxii.palma.tool
+Name: palmatool
+Depends: 
+Architecture: iphoneos-arm
+Description: haxii 
+Maintainer: haxii
+Author: haxii
+Section: System
+Tag: role::hacker
+Version: 0.0.1-1+debug
+Installed-Size: 10648

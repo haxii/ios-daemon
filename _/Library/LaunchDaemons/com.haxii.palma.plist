@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>KeepAlive</key>
+        <true/>
+        <key>Label</key>
+        <string>com.haxii.palma</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/usr/bin/palmatool</string>
+            <string>-config</string>
+            <string>/etc/palma.ini</string>
+        </array>
+        <key>Sockets</key>
+        <dict>
+            <key>Listeners</key>
+            <dict>
+                <key>SockServiceName</key>
+                <string>palma</string>
+                <key>SockType</key>
+                <string>stream</string>
+                <key>SockFamily</key>
+                <string>IPv4</string>
+            </dict>
+        </dict>
+        <key>StandardErrorPath</key>
+        <string>/dev/null</string>
+        <key>SessionCreate</key>
+        <true/>
+        <key>inetdCompatibility</key>
+        <dict>
+            <key>Wait</key>
+            <false/>
+        </dict>
+        <key>RunAtLoad</key>
+        <true/>
+    </dict>
+</plist>
