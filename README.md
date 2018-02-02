@@ -126,6 +126,7 @@ sudo chown -R root:wheel _/
 ```
 然后使用 dpkg-deb 打包 
 
+可以尝试使用 Makefile 打包
 ```bash
 sudo make
 ```
