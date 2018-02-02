@@ -6,7 +6,7 @@ demonize an iOS command-line tool on a jail broken device using dpkg &amp; launc
 
 后台进程包括两个部分，一个可执行的二进制文件和一个配置 plist 配置文件
 
-## 一、创建可执行二进制文件
+## 一、创建可执行二进制文件
 
 利用 `Theos` 来创建一个可执行二进制文件, 保存在项目根目录下的 `/usr/bin/` 文件夹中
 
@@ -35,6 +35,7 @@ demonize an iOS command-line tool on a jail broken device using dpkg &amp; launc
 Program键对应的是可执行文件所在位置的绝对路径，这两个都是必填的。
 
 ### 传入多个参数
+
 如果你的后台进程还有其他的参数，那么只需要在文件中增加类似下面这样的键值对即可：
 
 ```text
@@ -70,6 +71,7 @@ The SockType is one of dgram (UDP) or stream (TCP/IP)
 
 
 ### Emulating inetd
+
 The launchd daemon emulates the older inetd-style daemon semantics if you provide the inetdCompatibility key:
 
 ```text
