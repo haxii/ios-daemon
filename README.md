@@ -119,10 +119,10 @@ haxii-5:~ root# ls -l /sbin/launchd
 ```
 所以需要修改包内每个文件的权限
 
-先需要打包文件移动到一个临时文件夹`_`下面, 然后修改权限,如下：
+先需要打包文件移动到一个临时文件夹`.tmp`下面, 然后修改权限,如下：
 
 ```bash
-sudo chown -R root:wheel _/
+sudo chown -R root:wheel .tmp/
 ```
 然后使用 dpkg-deb 打包 
 
