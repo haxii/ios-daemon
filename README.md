@@ -8,13 +8,13 @@ demonize an iOS command-line tool on a jail broken device using dpkg &amp; launc
 
 ## 一、创建可执行二进制文件
 
-利用 `Theos` 来创建一个可执行二进制文件, 保存在项目根目录下的 `/usr/bin/` 文件夹中
+利用 [`Theos`](https://github.com/cszichao/theos-golang) 来创建一个可执行二进制文件, 保存在项目根目录下的 `/usr/bin/` 文件夹中
 
 ## 二、创建 plist
 
 以 “com.haxii.demo.plist” 为文件名新建文件，然后将下面的代码写入文件中：
 
-```xml
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -31,8 +31,10 @@ demonize an iOS command-line tool on a jail broken device using dpkg &amp; launc
 </plist>
 ```
 
-在这些键值对当中，Label键对应的是一个可以唯一标示你的后台进程的字符串，
-Program键对应的是可执行文件所在位置的绝对路径，这两个都是必填的。
+把这个 plist 配置文件保存在项目根目录下的 `/Library/LaunchDaemons/` 文件夹中
+
+在这些键值对当中，Label 键对应的是一个可以唯一标示你的后台进程的字符串，
+Program 键对应的是可执行文件所在位置的绝对路径，这两个都是必填的。
 
 ### 传入多个参数
 
@@ -80,8 +82,6 @@ The launchd daemon emulates the older inetd-style daemon semantics if you provid
         <false/>
     </dict>
 ```
-
-把这个 plist 配置文件保存在项目根目录下的 /Library/LaunchDaemons/ 文件夹中
 
 ## 三、添加 deb 安装卸载脚本
 
