@@ -81,11 +81,11 @@ The launchd daemon emulates the older inetd-style daemon semantics if you provid
     </dict>
 ```
 
-把这个 plist 配置文件保存在项目根目录下的/layout/Library/LaunchDaemons/文件夹中
+把这个 plist 配置文件保存在项目根目录下的 /Library/LaunchDaemons/ 文件夹中
 
 ## 三、添加 deb 安装卸载脚本
 
-创建文件夹 `DEBIAN`, 和 文件 control
+创建文件夹 `DEBIAN`, 和文件 control
 
 为了在 deb 包安装后自动运行，我们需要添加运行脚本 `extrainst_`  和 `prerm`
 

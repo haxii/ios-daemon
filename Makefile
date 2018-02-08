@@ -1,23 +1,23 @@
-deb_dir = .
+deb.tmpdir = .
 
 all: builddir release clean
 	echo "make success"
 
 builddir:clean
-	mkdir -p $(deb_dir)/_/DEBIAN
-	mkdir -p $(deb_dir)/_/etc
-	mkdir -p $(deb_dir)/_/Library/LaunchDaemons
-	mkdir -p $(deb_dir)/_/usr/bin
-	cp -rf $(deb_dir)/DEBIAN/* $(deb_dir)/_/DEBIAN/
-	cp -rf $(deb_dir)/etc/* $(deb_dir)/_/etc/
-	cp -rf $(deb_dir)/Library/LaunchDaemons/* $(deb_dir)/_/Library/LaunchDaemons/
-	cp -rf $(deb_dir)/usr/bin/* $(deb_dir)/_/usr/bin/
+	mkdir -p $(deb.tmpdir)/.tmp/DEBIAN
+	mkdir -p $(deb.tmpdir)/.tmp/etc
+	mkdir -p $(deb.tmpdir)/.tmp/Library/LaunchDaemons
+	mkdir -p $(deb.tmpdir)/.tmp/usr/bin
+	cp -rf $(deb.tmpdir)/DEBIAN/* $(deb.tmpdir)/.tmp/DEBIAN/
+	cp -rf $(deb.tmpdir)/etc/* $(deb.tmpdir)/.tmp/etc/
+	cp -rf $(deb.tmpdir)/Library/LaunchDaemons/* $(deb.tmpdir)/.tmp/Library/LaunchDaemons/
+	cp -rf $(deb.tmpdir)/usr/bin/* $(deb.tmpdir)/.tmp/usr/bin/
 
 release:
-	mkdir -p $(deb_dir)/package
-	rm -rf $(deb_dir)/package/*
-	chown -R root:wheel $(deb_dir)/_/
-	dpkg-deb -Zgzip -b $(deb_dir)/_/ $(deb_dir)/package/ios_daemon+0.0.1-iphone-arm.deb
-
+	mkdir -p $(deb.tmpdir)/package
+	rm -rf $(deb.tmpdir)/package/*
+	chown -R root:wheel $(deb.tmpdir)/.tmp/
+	dpkg-deb -Zgzip -b $(deb.tmpdir)/.tmp/ $(deb.tmpdir)/package/ios.tmpdaemon+0.0.1-iphone-arm.deb
+	rm -rf $(deb.tmpdir)/.tmp/
 clean:
-	rm -rf $(deb_dir)/_/
+	rm -rf $(deb.tmpdir)/.tmp/
