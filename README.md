@@ -1,6 +1,6 @@
 # iOS-daemon
 
-demonize an iOS command-line tool on a jail broken device using dpkg &amp; launchctl
+Demonize an iOS command-line tool on a jail broken device using dpkg &amp; launchctl
 
 守护进程是由 `launchd` 启动，通过 `launchctl` 命令加载配置文件
 
