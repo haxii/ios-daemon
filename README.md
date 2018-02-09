@@ -8,7 +8,7 @@ Demonize an iOS command-line tool on a jail broken device using dpkg &amp; launc
 
 ## 一、创建可执行二进制文件
 
-利用 [`Theos`](https://github.com/cszichao/theos-golang) 来创建一个可执行二进制文件, 保存在项目根目录下的 `/usr/bin/` 文件夹中
+利用 [`Theos`](https://github.com/cszichao/theos-golang) 来创建一个可执行二进制文件 `daemon_demo`, 保存在项目根目录下的 `/usr/bin/` 文件夹中
 
 ## 二、创建 plist
 
@@ -43,12 +43,12 @@ Program 键对应的是可执行文件所在位置的绝对路径，这两个都
 ```text
     <key>ProgramArguments</key>
     <array>
-        <string>arg1</string>
-        <string>arg2</string>
-        <string>more args...</string>
+        <string>/usr/bin/daemon_demo</string>
+        <string>-config</string>
+        <string>/etc/demo.ini</string>
     </array>
 ```
-可执行二进制文件的配置文件保存在项目根目录下的 `/etc/` 文件夹中
+可执行二进制文件的配置文件 `demo.ini` 保存在项目根目录下的 `/etc/` 文件夹中
 
 ### Listening on Sockets
 
@@ -59,7 +59,7 @@ You can also include other keys in your configuration property list file. For ex
         <key>Listeners</key>
         <dict>
             <key>SockServiceName</key>
-            <string>daemondome</string>
+            <string>daemondemo</string>
             <key>SockType</key>
             <string>stream</string>
             <key>SockFamily</key>
@@ -68,8 +68,11 @@ You can also include other keys in your configuration property list file. For ex
     </dict>
 
 ```
-
-The SockType is one of dgram (UDP) or stream (TCP/IP)
+The string for SockServiceName typically comes from the leftmost column in /etc/services. The SockType is one of dgram (UDP) or stream (TCP/IP). If you need to pass a port number that is not listed in the well-known ports list, the format is the same, except the string contains a number instead of a name. For example:
+```
+<key>SockServiceName</key>
+<string>23</string>
+```
 
 ### Emulating inetd
 
