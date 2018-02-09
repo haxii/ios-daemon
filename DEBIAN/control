@@ -1,0 +1,10 @@
+Package: com.haxii.daemondemo
+Name: daemondemo
+Depends: 
+Architecture: iphoneos-arm
+Description: haxii 
+Maintainer: haxii
+Author: haxii
+Section: System
+Tag: role::hacker
+Version: 0.0.1-1+debug
