@@ -48,7 +48,7 @@ Program 键对应的是可执行文件所在位置的绝对路径，这两个都
         <string>more args...</string>
     </array>
 ```
-工具的配置文件保存在项目根目录下的 `/etc/` 文件夹中
+可执行二进制文件的配置文件保存在项目根目录下的 `/etc/` 文件夹中
 
 ### Listening on Sockets
 
