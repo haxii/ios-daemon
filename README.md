@@ -2,6 +2,8 @@
 
 Demonize an iOS command-line tool on a jail broken device using dpkg &amp; launchctl
 
+通过这个文档可以制作一个 deb 包, 在安装后变成一个守护进程来运行, 并且杀死后自动重启
+
 ## 原理
 
 守护进程是由 `launchd` 启动，通过 `launchctl` 命令加载配置文件
@@ -73,16 +75,15 @@ deb 安装包的基本信息文件 `control` 和安装卸载的脚本文件 `ext
 ```
 
 在这些键值对当中:
-* Label 键对应的是一个可以唯一标示你的后台进程的字符串，
-* Program 键对应的是可执行文件所在位置的绝对路径，这两个都是必填的。
-* ProgramArguments 如果你的后台进程还有其他的参数，那么只需要在文件中增加这样的键值对即可
-* KeepAlive 被杀死后会自动开启
-* RunAtLoad `launchctl` load plist 配置文件后会自动启动服务
-* Sockets if your daemon monitors a well-known port (one of the ports listed in /etc/services)
-  * SockServiceName  The string for SockServiceName typically comes from the leftmost column in /etc/services
-  * SockType is one of dgram (UDP) or stream (TCP/IP)
-* inetdCompatibility The launchd daemon emulates the older inetd-style daemon semantics if you provide the inetdCompatibility key
-
+* Label: 键对应的是一个可以唯一标示你的后台进程的字符串，
+* Program: 键对应的是可执行文件所在位置的绝对路径，这两个都是必填的。
+* ProgramArguments: 如果你的后台进程还有其他的参数，那么只需要在文件中增加这样的键值对即可
+* KeepAlive: 被杀死后会自动开启
+* RunAtLoad: `launchctl` load plist 配置文件后会自动启动服务
+* Sockets: if your daemon monitors a well-known port (one of the ports listed in /etc/services)
+  * SockServiceName:  The string for SockServiceName typically comes from the leftmost column in /etc/services
+  * SockType: is one of dgram (UDP) or stream (TCP/IP)
+* inetdCompatibility: The launchd daemon emulates the older inetd-style daemon semantics if you provide the inetdCompatibility key
 
 ### 创建 deb 安装包的 control 和安装卸载脚本
 
@@ -156,10 +157,11 @@ exit 0
 
 ### 修改权限
 
-通过命令将所有文件的 `用户和组` 改为 `root:wheel`：
+通过命令将所有文件的 `用户和组` 改为 `root:wheel`, 步骤如下：
 
-先需要打包文件移动到一个临时文件夹`.tmp`下面, 然后修改权限,如下：
+> 1、先需要打包文件移动到一个临时文件夹 `.tmp` 下面
 
+> 2、在命令行中执行如下, 修改权限
 ```bash
 sudo chown -R root:wheel .tmp/
 ```
@@ -167,7 +169,8 @@ sudo chown -R root:wheel .tmp/
 
 最后我们可以使用 dpkg-deb 将所有文件打成 deb 包
 ```bash
-dpkg-deb -Zgzip -b .tmp/ ./package/ios.tmpdaemon+0.0.1-iphone-arm.deb
+mkdir -p ./package
+dpkg-deb -Zgzip -b ./.tmp/ ./package/ios.tmpdaemon+0.0.1-iphone-arm.deb
 ```
 检查 deb 安装包的权限是否正确
 ```bash
@@ -181,7 +184,6 @@ drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./etc/
 drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./usr/
 drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./usr/bin/
 -rwxr-xr-x root/wheel  9047648 2018-02-08 14:09 ./usr/bin/daemon_demo
-
 ```
 
 这个 deb 包在安装后， `daemon_demo` 就可以变成一个守护进程来运行, 并且杀死后自动重启
