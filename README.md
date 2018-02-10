@@ -165,8 +165,11 @@ sudo chown -R root:wheel .tmp/
 ```
 ### 使用 dpkg-deb 打包 
 
-最后我们可以使用 dpkg-deb 将所有文件打成 deb 包, 这个 deb 包在安装后，
- `daemon_demo` 就可以变成一个守护进程来运行, 并且杀死后自动重启
+最后我们可以使用 dpkg-deb 将所有文件打成 deb 包
+```bash
+dpkg-deb -Zgzip -b .tmp/ ./package/ios.tmpdaemon+0.0.1-iphone-arm.deb
+```
+这个 deb 包在安装后， `daemon_demo` 就可以变成一个守护进程来运行, 并且杀死后自动重启
 
 ## 参考文档
 
