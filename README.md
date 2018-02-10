@@ -81,7 +81,7 @@ deb 安装包的基本信息文件 `control` 和安装卸载的脚本文件 `ext
 * Sockets if your daemon monitors a well-known port (one of the ports listed in /etc/services)
   * SockServiceName  The string for SockServiceName typically comes from the leftmost column in /etc/services
   * SockType is one of dgram (UDP) or stream (TCP/IP)
-* inetdCompatibility The launchd daemon emulates the older inetd-style daemon semantics if you provide the inetdCompatibility key:
+* inetdCompatibility The launchd daemon emulates the older inetd-style daemon semantics if you provide the inetdCompatibility key
 
 
 ### 创建 deb 安装包的 control 和安装卸载脚本
