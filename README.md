@@ -169,6 +169,21 @@ sudo chown -R root:wheel .tmp/
 ```bash
 dpkg-deb -Zgzip -b .tmp/ ./package/ios.tmpdaemon+0.0.1-iphone-arm.deb
 ```
+检查 deb 安装包的权限是否正确
+```bash
+lusi@lusi-macpro:~/ios-demon/package$ dpkg-deb -c ios.tmpdaemon+0.0.1-iphone-arm.deb
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./Library/
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./Library/LaunchDaemons/
+-rw-r--r-- root/wheel     1158 2018-02-08 14:09 ./Library/LaunchDaemons/com.haxii.demo.plist
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./etc/
+-rw-r--r-- root/wheel       73 2018-02-08 14:09 ./etc/demo.ini
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./usr/
+drwxr-xr-x root/wheel        0 2018-02-08 14:09 ./usr/bin/
+-rwxr-xr-x root/wheel  9047648 2018-02-08 14:09 ./usr/bin/daemon_demo
+
+```
+
 这个 deb 包在安装后， `daemon_demo` 就可以变成一个守护进程来运行, 并且杀死后自动重启
 
 ## 参考文档
