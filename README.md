@@ -24,9 +24,31 @@ haxii-5:~ root# ls -l /sbin/launchd
 现在我们已经有了一个可执行二进制文件 `daemon_demo` (这个 demo 是一个 http server, 安装成功以后,
  你可以访问`http://0.0.0.0:1118/`来验证是否成功) 和它的配置文件 `demo.ini` (提供一个 server port 配置)
 
-接下来需要做的是创建一个 plist 配置文件, 
-deb 安装包的基本信息文件 `control` 和安装卸载的脚本文件 `extrainst_` `prerm`, 
+接下来需要做的是创建 plist 配置文件,
+
+deb 安装包的基本信息文件 `control`,
+
+安装脚本文件 `extrainst_` 和 卸载脚本文件 `prerm`
+
 最后修改他们的权限并使用 `dpkg-deb` 打包
+
+deb 包的目录结构如下：
+
+```text
+.
+├── DEBIAN
+│   ├── control
+│   ├── extrainst_
+│   └── prerm
+├── Library
+│   └── LaunchDaemons
+│       └── com.haxii.demo.plist
+├── etc
+│   └── demo.ini
+└── usr
+    └── bin
+        └── daemon_demo
+```
 
 ### 创建 plist 配置文件
 
@@ -125,34 +147,6 @@ if [[ $1 == remove || $1 == purge ]]; then
 fi
 
 exit 0
-```
-
-### 整理文件目录
-
-最后我们把可执行二进制文件 `daemon_demo` 保存在项目根目录下的 `/usr/bin/` 文件夹中
-
-可执行二进制文件的配置文件 `demo.ini` 保存在项目根目录下的 `/etc/` 文件夹中
-
-把 plist 配置文件 `com.haxii.demo.plist` 保存在项目根目录下的 `/Library/LaunchDaemons/` 文件夹中
-
-把 `control`, `extrainst_`, `prerm` 放在项目根目录下的 `/DEBIAN/` 文件夹中
-
-最后我们的目录结构应该是这样
-
-```text
-.
-├── DEBIAN
-│   ├── control
-│   ├── extrainst_
-│   └── prerm
-├── Library
-│   └── LaunchDaemons
-│       └── com.haxii.demo.plist
-├── etc
-│   └── demo.ini
-└── usr
-    └── bin
-        └── daemon_demo
 ```
 
 ### 修改权限
