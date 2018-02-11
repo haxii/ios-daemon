@@ -24,11 +24,11 @@ haxii-5:~ root# ls -l /sbin/launchd
 现在我们已经有了一个可执行二进制文件 `daemon_demo` (这个 demo 是一个 http server, 安装成功以后,
  你可以访问`http://0.0.0.0:1118/`来验证是否成功) 和它的配置文件 `demo.ini` (提供一个 server port 配置)
 
-接下来需要做的是创建 plist 配置文件,
-
-deb 安装包的基本信息文件 `control`,
-
-安装脚本文件 `extrainst_` 和 卸载脚本文件 `prerm`
+接下来需要做的是创建如下几个文件:
+* plist 配置文件 `com.haxii.demo.plist`,
+* deb 安装包的基本信息文件 `control`,
+* 安装脚本文件 `extrainst_` 
+* 卸载脚本文件 `prerm`
 
 最后修改他们的权限并使用 `dpkg-deb` 打包
 
