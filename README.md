@@ -1,4 +1,4 @@
-# iOS-daemon
+# iOS Daemon
 
 Demonize an iOS command-line tool on a jail broken device using dpkg &amp; launchctl
 
